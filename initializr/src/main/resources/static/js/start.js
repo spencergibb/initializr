@@ -97,12 +97,6 @@ $(function () {
             engine.add(data);
         });
     };
-    $("#dependencies").addClass("hidden");
-    $("#showall").click(function () {
-        $("#dependencies").removeClass("hidden");
-        $("body").scrollTop($("#deps-section").offset().top - $(".start-header").outerHeight() - 20);
-        return false;
-    });
     refreshDependencies($("#bootVersion").val());
     $("#type").on('change', function () {
         $("#form").attr('action', $(this.options[this.selectedIndex]).attr('data-action'))
@@ -120,7 +114,7 @@ $(function () {
         identify: function (obj) {
             return obj.id;
         },
-        sorter: function (a, b) {
+        sorter: function(a,b) {
             return 0;
         },
         cache: false
