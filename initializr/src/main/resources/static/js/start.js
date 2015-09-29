@@ -133,9 +133,6 @@ $(function () {
                 }
             }
         });
-    $('#autocomplete').bind('keypress', function (event) {
-        return event.keyCode != 13;
-    });
     $('#autocomplete').bind('typeahead:select', function (ev, suggestion) {
         var versions = new Versions();
         var bootVersion = $("#bootVersion").val();
@@ -168,5 +165,17 @@ $(function () {
     Mousetrap.bind(['command+enter', 'ctrl+enter'], function (e) {
         $("#form").submit();
         return false;
+    });
+    var autocompleteTrap = new Mousetrap($("#autocomplete").get(0));
+    autocompleteTrap.bind(['command+enter', 'ctrl+enter'], function (e) {
+        $("#form").submit();
+        return false;
+    });
+    autocompleteTrap.bind("enter", function(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
     });
 });
