@@ -65,10 +65,10 @@
 
 $(function () {
     if (navigator.appVersion.indexOf("Mac") != -1) {
-        $("#generate").append("<kbd>&#8984; + &#9166;</kbd>");
+        $(".btn-primary").append("<kbd>&#8984; + &#9166;</kbd>");
     }
     else {
-        $("#generate").append("<kbd>alt + &#9166;</kbd>");
+        $(".btn-primary").append("<kbd>alt + &#9166;</kbd>");
     }
 
     var refreshDependencies = function (versionRange) {
@@ -134,14 +134,27 @@ $(function () {
             }
         });
     $('#autocomplete').bind('typeahead:select', function (ev, suggestion) {
-        addTag(suggestion.id, suggestion.name);
-        $("#dependencies input[value='" + suggestion.id + "']").prop('checked', true);
+        var alreadySelected = $("#dependencies input[value='" + suggestion.id + "']").prop('checked');
+        if(alreadySelected) {
+            removeTag(suggestion.id);
+            $("#dependencies input[value='" + suggestion.id + "']").prop('checked', false);
+        }
+        else {
+            addTag(suggestion.id, suggestion.name);
+            $("#dependencies input[value='" + suggestion.id + "']").prop('checked', true);
+        }
         $('#autocomplete').typeahead('val', '');
     });
     $("#starters").on("click", "button", function () {
         var id = $(this).parent().attr("data-id");
         $("#dependencies input[value='" + id + "']").prop('checked', false);
         removeTag(id);
+    });
+    $("#groupId").on("change", function() {
+        $("#packageName").val($(this).val());
+    });
+    $("#artifactId").on("change", function() {
+        $("#name").val($(this).val());
     });
     $("#dependencies input").bind("change", function () {
         var value = $(this).val()
