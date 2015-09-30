@@ -65,10 +65,10 @@
 
 $(function () {
     if (navigator.appVersion.indexOf("Mac") != -1) {
-        $("#shortcut").html("or <kbd>command</kbd> + <kbd>enter</kbd>")
+        $("#generate").append("<kbd>&#8984; + &#9166;</kbd>");
     }
     else {
-        $("#shortcut").html("or <kbd>ctrl</kbd> + <kbd>enter</kbd>")
+        $("#generate").append("<kbd>alt + &#9166;</kbd>");
     }
 
     var refreshDependencies = function (versionRange) {
@@ -134,18 +134,8 @@ $(function () {
             }
         });
     $('#autocomplete').bind('typeahead:select', function (ev, suggestion) {
-        var versions = new Versions();
-        var bootVersion = $("#bootVersion").val();
-        if (!suggestion.versionRange || versions.matchRange(suggestion.versionRange)(bootVersion)) {
-            addTag(suggestion.id, suggestion.name);
-            $("#dependencies input[value='" + suggestion.id + "']").prop('checked', true);
-        }
-        else {
-            $(".message div").removeClass("invisible");
-            window.setTimeout(function () {
-                $(".message div").addClass("invisible");
-            }, 3000);
-        }
+        addTag(suggestion.id, suggestion.name);
+        $("#dependencies input[value='" + suggestion.id + "']").prop('checked', true);
         $('#autocomplete').typeahead('val', '');
     });
     $("#starters").on("click", "button", function () {
@@ -162,12 +152,12 @@ $(function () {
             removeTag(value);
         }
     });
-    Mousetrap.bind(['command+enter', 'ctrl+enter'], function (e) {
+    Mousetrap.bind(['command+enter', 'alt+enter'], function (e) {
         $("#form").submit();
         return false;
     });
     var autocompleteTrap = new Mousetrap($("#autocomplete").get(0));
-    autocompleteTrap.bind(['command+enter', 'ctrl+enter'], function (e) {
+    autocompleteTrap.bind(['command+enter', 'alt+enter'], function (e) {
         $("#form").submit();
         return false;
     });
