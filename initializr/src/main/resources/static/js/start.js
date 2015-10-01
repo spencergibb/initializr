@@ -94,6 +94,11 @@ $(function () {
     var initializeSearchEngine = function (engine, bootVersion) {
         $.getJSON("/ui/dependencies.json?version=" + bootVersion, function (data) {
             engine.clear();
+            $.each(data.dependencies, function(idx, item) {
+                if(item.weight === undefined) {
+                    item.weight = 0;
+                }
+            });
             engine.add(data.dependencies);
         });
     };
@@ -108,14 +113,20 @@ $(function () {
         refreshDependencies(this.value);
         initializeSearchEngine(starters, this.value);
     });
+    $(".advanced a").on("click", function() {
+        $(".hidden").removeClass("hidden");
+        $(".advanced").addClass("hidden");
+        $("body").scrollTop(0);
+        return false;
+    });
     var starters = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'description'),
+        datumTokenizer: Bloodhound.tokenizers.obj.nonword('name', 'description', 'keywords', 'group'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         identify: function (obj) {
             return obj.id;
         },
         sorter: function(a,b) {
-            return 0;
+            return b.weight - a.weight;
         },
         cache: false
     });
