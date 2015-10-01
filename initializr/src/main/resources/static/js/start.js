@@ -113,9 +113,17 @@ $(function () {
         refreshDependencies(this.value);
         initializeSearchEngine(starters, this.value);
     });
-    $(".advanced a").on("click", function() {
-        $(".hidden").removeClass("hidden");
-        $(".advanced").addClass("hidden");
+    $(".tofullversion a").on("click", function() {
+        $(".full").removeClass("hidden");
+        $(".tofullversion").addClass("hidden");
+        $(".tosimpleversion").removeClass("hidden");
+        $("body").scrollTop(0);
+        return false;
+    });
+    $(".tosimpleversion a").on("click", function() {
+        $(".full").addClass("hidden");
+        $(".tofullversion").removeClass("hidden");
+        $(".tosimpleversion").addClass("hidden");
         $("body").scrollTop(0);
         return false;
     });

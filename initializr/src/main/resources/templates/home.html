@@ -57,23 +57,23 @@
                                value="${artifactId.content}"
                                name="artifactId">
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="name" class="control-label">${name.title}</label>
                         <input tabindex="5" id="name" class="form-control" type="text" value="${name.content}"
                                name="name">
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="description" class="control-label">${description.title}</label>
                         <input tabindex="6" id="description" class="form-control" type="text"
                                value="${description.content}" name="description">
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="packageName" class="control-label">${packageName.title}</label>
                         <input tabindex="7" id="packageName" class="form-control" type="text"
                                value="${packageName.content}"
                                name="packageName">
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="packaging" class="control-label">${packagings.title}</label>
                         <select tabindex="8" class="form-control" id="packaging" name="packaging">
                             <% packagings.content.each { %>
@@ -82,7 +82,7 @@
                             <% } %>
                         </select>
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="javaVersion" class="control-label">${javaVersions.title}</label>
                         <select tabindex="9" class="form-control" name="javaVersion" id="javaVersion">
                             <% javaVersions.content.each { %>
@@ -91,7 +91,7 @@
                             <% } %>
                         </select>
                     </div>
-                    <div class="form-group hidden">
+                    <div class="form-group full hidden">
                         <label for="language" class="control-label">${languages.title}</label>
                         <select tabindex="10" class="form-control" name="language" id="language">
                             <% languages.content.each { %>
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label for="autocomplete" class="control-label">Search for dependencies</label>
                         <input tabindex="11" id="autocomplete" class="form-control" type="text"
-                               placeholder="Starters and dependencies..."
+                               placeholder="Web, Security, JPA, Actuator, Devtools..."
                                name="autocomplete">
                     </div>
                     <div class="form-group">
@@ -119,6 +119,9 @@
                     </div>
                 </div>
             </div>
+            <div class="row hidden tosimpleversion">
+                <p>Too many options? <a href="#">Switch back to the simple version.</a></p>
+            </div>
             <div class="row">
                 <p class="text-center">
                     <button tabindex="12" name="generate-project" type="submit" class="btn btn-lg btn-primary"
@@ -127,11 +130,11 @@
                     </button>
                 </p>
             </div>
-            <div class="row advanced">
-                <p>Don't know what to look for? Want more options? <a href="#">Click here to switch to the advanced version</a></p>
+            <div class="row tofullversion">
+                <p>Don't know what to look for? Want more options? <a href="#">Switch to the full version.</a></p>
             </div>
             <div class="row">
-                <div id="dependencies" class="hidden">
+                <div id="dependencies" class="full hidden">
                     <% dependencies.content.each { %>
                     <div class="form-group col-sm-6">
                         <h3>${it.name}</h3>
@@ -148,7 +151,7 @@
                     <% } %>
                 </div>
             </div>
-            <div class="row hidden">
+            <div class="row full hidden">
                 <p class="text-center">
                     <button tabindex="14" name="generate-project" type="submit" class="btn btn-lg btn-primary"
                             role="button">
